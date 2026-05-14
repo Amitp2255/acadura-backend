@@ -13,6 +13,7 @@ const createApplication = async (req, res) => {
       preferredStates, 
       preferredDistricts, 
       interestedColleges,
+      selectedCourses,
       notes
     } = req.body;
 
@@ -62,6 +63,7 @@ const createApplication = async (req, res) => {
       preferredStates: preferredStates || [],
       preferredDistricts: preferredDistricts || [],
       interestedColleges: interestedColleges || [],
+      selectedCourses: selectedCourses || [],
       notes: notes || '',
     });
 

@@ -39,10 +39,17 @@ app.use(cors({
   origin: (origin, callback) => {
     // Allow requests with no origin (mobile apps, curl, Postman)
     if (!origin) return callback(null, true);
-    // Allow any Vercel preview deployment automatically
-    if (origin.endsWith('.vercel.app') || ALLOWED_ORIGINS.includes(origin)) {
+    // Allow any local IP network, Vercel, or localhost automatically
+    if (origin.endsWith('.vercel.app') || 
+        ALLOWED_ORIGINS.includes(origin) || 
+        origin.startsWith('http://192.168.') || 
+        origin.startsWith('http://10.') ||
+        origin.startsWith('http://172.')) {
       return callback(null, true);
     }
+    // Allow all in dev mode as fallback
+    if (!isProd) return callback(null, true);
+    
     callback(new Error(`CORS: origin ${origin} not allowed`));
   },
   credentials: true,
@@ -87,6 +94,8 @@ app.use('/api/colleges', require('./routes/colleges'));
 app.use('/api/applications', require('./routes/applications'));
 app.use('/api/analytics', require('./routes/analytics'));
 app.use('/api/upload', require('./routes/uploadRoutes'));
+app.use('/api/questions', require('./routes/questions'));
+app.use('/api/settings', require('./routes/settings'));
 
 // ─── Health check ───
 app.get('/api/health', (req, res) => {

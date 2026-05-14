@@ -68,19 +68,19 @@ const collegeSchema = new mongoose.Schema(
         name: { type: String, required: true },
         category: { type: String, trim: true },
         duration: { type: String, default: '4 Years' },
-        fees: { type: Number },
+        fees: { type: String, trim: true, default: '' },
         eligibility: { type: String, trim: true },
       },
     ],
     fees: {
-      min: { type: Number, required: true },
-      max: { type: Number, required: true },
+      min: { type: String, trim: true, default: '0' },
+      max: { type: String, trim: true, default: '0' },
     },
     placement: {
-      percentage: { type: Number, required: true },
-      averagePackage: { type: Number, required: true },
-      highestPackage: { type: Number },
-      medianPackage: { type: Number },
+      percentage: { type: Number, default: 0 },
+      averagePackage: { type: Number, default: 0 },
+      highestPackage: { type: Number, default: 0 },
+      medianPackage: { type: Number, default: 0 },
     },
     recruiters: [
       {

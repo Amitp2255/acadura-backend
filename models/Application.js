@@ -38,6 +38,10 @@ const applicationSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'College',
     }],
+    selectedCourses: [{
+      type: String,
+      trim: true,
+    }],
     status: {
       type: String,
       enum: ['new', 'contacted', 'enrolled', 'closed'],
